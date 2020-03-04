@@ -1,21 +1,23 @@
 <?php
 
-define ('DB_SERVER','localhost');
-define ('DB_USER','root');
-define ('DB_PASS','');
-define ('DB_NAME','btc3205');
+const DB_SERVER = 'localhost';
+const DB_USER = 'root';
+const DB_PASS = '';
+const DB_NAME = 'btc3205';
 
 class DBConnector{
     public $conn;
     
-    
+/*function __construct allows you to initialize 
+an object's properties upon creation of the object. 
+PHP will automatically call this function when you create an object from a class*/
     function __construct (){
-        $this->conn = mysql_connect (DB_SERVER, DB_USER, DB_PASS) or die ("Error" .mysql_select_db());
-        mysql_select_db(DB_NAME, $this->conn);   
+        $this->conn = mysqli_connect (DB_SERVER, DB_USER, DB_PASS) or die ("Error" .mysqli_error());
+        mysqli_select_db($this->conn, DB_NAME);   //get the connection first, then select the db
     }
     
     public function closeDatabase (){
-        mysql_close ($this->conn);
+        mysqli_close ($this->conn); //research about db connection and closing
     }
 }
 
